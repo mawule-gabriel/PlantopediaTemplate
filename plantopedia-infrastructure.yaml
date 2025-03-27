@@ -49,7 +49,7 @@ Parameters:
 
 Resources:
   # VPC and Networking Resources
-  PlantopediaVPC8:
+  PlantopediaVPC9:
     Type: AWS::EC2::VPC
     Properties:
       CidrBlock: !Ref VpcCidr
@@ -57,153 +57,153 @@ Resources:
       EnableDnsHostnames: true
       Tags:
         - Key: Name
-          Value: "PlantopediaVPC8"
+          Value: "PlantopediaVPC9"
 
-  PlantopediaInternetGateway8:
+  PlantopediaInternetGateway9:
     Type: AWS::EC2::InternetGateway
     Properties:
       Tags:
         - Key: Name
-          Value: "PlantopediaIGW8"
+          Value: "PlantopediaIGW9"
 
-  PlantopediaVPCGatewayAttachment8:
+  PlantopediaVPCGatewayAttachment9:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
-      VpcId: !Ref PlantopediaVPC8
-      InternetGatewayId: !Ref PlantopediaInternetGateway8
+      VpcId: !Ref PlantopediaVPC9
+      InternetGatewayId: !Ref PlantopediaInternetGateway9
 
-  PlantopediaPublicSubnet18:
+  PlantopediaPublicSubnet19:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref PlantopediaVPC8
+      VpcId: !Ref PlantopediaVPC9
       CidrBlock: !Ref PublicSubnet1Cidr
       AvailabilityZone: !Select [0, !GetAZs ""]
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: "PlantopediaPublicSubnet18"
+          Value: "PlantopediaPublicSubnet19"
 
-  PlantopediaPublicSubnet28:
+  PlantopediaPublicSubnet29:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref PlantopediaVPC8
+      VpcId: !Ref PlantopediaVPC9
       CidrBlock: !Ref PublicSubnet2Cidr
       AvailabilityZone: !Select [1, !GetAZs ""]
       MapPublicIpOnLaunch: true
       Tags:
         - Key: Name
-          Value: "PlantopediaPublicSubnet28"
+          Value: "PlantopediaPublicSubnet29"
 
-  PlantopediaPrivateSubnet18:
+  PlantopediaPrivateSubnet19:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref PlantopediaVPC8
+      VpcId: !Ref PlantopediaVPC9
       CidrBlock: !Ref PrivateSubnet1Cidr
       AvailabilityZone: !Select [0, !GetAZs ""]
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: "PlantopediaPrivateSubnet18"
+          Value: "PlantopediaPrivateSubnet19"
 
-  PlantopediaPrivateSubnet28:
+  PlantopediaPrivateSubnet29:
     Type: AWS::EC2::Subnet
     Properties:
-      VpcId: !Ref PlantopediaVPC8
+      VpcId: !Ref PlantopediaVPC9
       CidrBlock: !Ref PrivateSubnet2Cidr
       AvailabilityZone: !Select [1, !GetAZs ""]
       MapPublicIpOnLaunch: false
       Tags:
         - Key: Name
-          Value: "PlantopediaPrivateSubnet28"
+          Value: "PlantopediaPrivateSubnet29"
 
-  PlantopediaNATGatewayEIP8:
+  PlantopediaNATGatewayEIP9:
     Type: AWS::EC2::EIP
-    DependsOn: PlantopediaVPCGatewayAttachment8
+    DependsOn: PlantopediaVPCGatewayAttachment9
     Properties:
       Domain: vpc
 
-  PlantopediaNATGateway8:
+  PlantopediaNATGateway9:
     Type: AWS::EC2::NatGateway
-    DependsOn: PlantopediaVPCGatewayAttachment8
+    DependsOn: PlantopediaVPCGatewayAttachment9
     Properties:
-      AllocationId: !GetAtt PlantopediaNATGatewayEIP8.AllocationId
-      SubnetId: !Ref PlantopediaPublicSubnet18
+      AllocationId: !GetAtt PlantopediaNATGatewayEIP9.AllocationId
+      SubnetId: !Ref PlantopediaPublicSubnet19
       Tags:
         - Key: Name
-          Value: "PlantopediaNATGateway8"
+          Value: "PlantopediaNATGateway9"
 
-  PlantopediaPublicRouteTable8:
+  PlantopediaPublicRouteTable9:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref PlantopediaVPC8
+      VpcId: !Ref PlantopediaVPC9
       Tags:
         - Key: Name
-          Value: "PlantopediaPublicRouteTable8"
+          Value: "PlantopediaPublicRouteTable9"
 
-  PlantopediaPublicRoute8:
+  PlantopediaPublicRoute9:
     Type: AWS::EC2::Route
-    DependsOn: PlantopediaVPCGatewayAttachment8
+    DependsOn: PlantopediaVPCGatewayAttachment9
     Properties:
-      RouteTableId: !Ref PlantopediaPublicRouteTable8
+      RouteTableId: !Ref PlantopediaPublicRouteTable9
       DestinationCidrBlock: "0.0.0.0/0"
-      GatewayId: !Ref PlantopediaInternetGateway8
+      GatewayId: !Ref PlantopediaInternetGateway9
 
-  PlantopediaPublicSubnet1RouteTableAssociation8:
+  PlantopediaPublicSubnet1RouteTableAssociation9:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref PlantopediaPublicSubnet18
-      RouteTableId: !Ref PlantopediaPublicRouteTable8
+      SubnetId: !Ref PlantopediaPublicSubnet19
+      RouteTableId: !Ref PlantopediaPublicRouteTable9
 
-  PlantopediaPublicSubnet2RouteTableAssociation8:
+  PlantopediaPublicSubnet2RouteTableAssociation9:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref PlantopediaPublicSubnet28
-      RouteTableId: !Ref PlantopediaPublicRouteTable8
+      SubnetId: !Ref PlantopediaPublicSubnet29
+      RouteTableId: !Ref PlantopediaPublicRouteTable9
 
-  PlantopediaPrivateRouteTable8:
+  PlantopediaPrivateRouteTable9:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId: !Ref PlantopediaVPC8
+      VpcId: !Ref PlantopediaVPC9
       Tags:
         - Key: Name
-          Value: "PlantopediaPrivateRouteTable8"
+          Value: "PlantopediaPrivateRouteTable9"
 
-  PlantopediaPrivateRoute8:
+  PlantopediaPrivateRoute9:
     Type: AWS::EC2::Route
     Properties:
-      RouteTableId: !Ref PlantopediaPrivateRouteTable8
+      RouteTableId: !Ref PlantopediaPrivateRouteTable9
       DestinationCidrBlock: "0.0.0.0/0"
-      NatGatewayId: !Ref PlantopediaNATGateway8
+      NatGatewayId: !Ref PlantopediaNATGateway9
 
-  PlantopediaPrivateSubnet1RouteTableAssociation8:
+  PlantopediaPrivateSubnet1RouteTableAssociation9:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref PlantopediaPrivateSubnet18
-      RouteTableId: !Ref PlantopediaPrivateRouteTable8
+      SubnetId: !Ref PlantopediaPrivateSubnet19
+      RouteTableId: !Ref PlantopediaPrivateRouteTable9
 
-  PlantopediaPrivateSubnet2RouteTableAssociation8:
+  PlantopediaPrivateSubnet2RouteTableAssociation9:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
-      SubnetId: !Ref PlantopediaPrivateSubnet28
-      RouteTableId: !Ref PlantopediaPrivateRouteTable8
+      SubnetId: !Ref PlantopediaPrivateSubnet29
+      RouteTableId: !Ref PlantopediaPrivateRouteTable9
 
   # RDS and Secrets Manager Resources
-  PlantopediaDBSubnetGroup8:
+  PlantopediaDBSubnetGroup9:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
       DBSubnetGroupDescription: "Subnet group for Plantopedia RDS instance"
       SubnetIds:
-        - !Ref PlantopediaPrivateSubnet18
-        - !Ref PlantopediaPrivateSubnet28
+        - !Ref PlantopediaPrivateSubnet19
+        - !Ref PlantopediaPrivateSubnet29
       Tags:
         - Key: Name
-          Value: "PlantopediaDBSubnetGroup8"
+          Value: "PlantopediaDBSubnetGroup9"
 
-  PlantopediaRDSSecurityGroup8:
+  PlantopediaRDSSecurityGroup9:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: "Security Group for Plantopedia RDS PostgreSQL instance"
-      VpcId: !Ref PlantopediaVPC8
+      VpcId: !Ref PlantopediaVPC9
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 5432
@@ -211,12 +211,12 @@ Resources:
           CidrIp: !Ref VpcCidr
       Tags:
         - Key: Name
-          Value: "PlantopediaRDSSecurityGroup8"
+          Value: "PlantopediaRDSSecurityGroup9"
 
-  PlantopediaDBCredentialsSecret8:
+  PlantopediaDBCredentialsSecret9:
     Type: AWS::SecretsManager::Secret
     Properties:
-      Name: "PlantopediaDBCredentials8"  # Updated to avoid conflict
+      Name: "PlantopediaDBCredentials9"
       Description: "Database credentials for the Plantopedia RDS PostgreSQL instance"
       SecretString: !Sub |
         {
@@ -228,7 +228,7 @@ Resources:
         - Key: Environment
           Value: Production
 
-  PlantopediaDBInstance8:
+  PlantopediaDBInstance9:
     Type: AWS::RDS::DBInstance
     Properties:
       Engine: postgres
@@ -237,18 +237,18 @@ Resources:
       MultiAZ: true
       PubliclyAccessible: false
       VPCSecurityGroups:
-        - !Ref PlantopediaRDSSecurityGroup8
-      DBSubnetGroupName: !Ref PlantopediaDBSubnetGroup8
-      MasterUsername: "{{resolve:secretsmanager:PlantopediaDBCredentials8:SecretString:username}}"
-      MasterUserPassword: "{{resolve:secretsmanager:PlantopediaDBCredentials8:SecretString:password}}"
+        - !Ref PlantopediaRDSSecurityGroup9
+      DBSubnetGroupName: !Ref PlantopediaDBSubnetGroup9
+      MasterUsername: "{{resolve:secretsmanager:PlantopediaDBCredentials9:SecretString:username}}"
+      MasterUserPassword: "{{resolve:secretsmanager:PlantopediaDBCredentials9:SecretString:password}}"
       DBName: !Ref PlantopediaDBName
       BackupRetentionPeriod: 7
       StorageEncrypted: true
 
 Outputs:
-  PlantopediaVPCId8:
+  PlantopediaVPCId9:
     Description: "The Plantopedia VPC ID"
-    Value: !Ref PlantopediaVPC8
-  PlantopediaRDSInstanceEndpoint8:
+    Value: !Ref PlantopediaVPC9
+  PlantopediaRDSInstanceEndpoint9:
     Description: "Plantopedia RDS Endpoint"
-    Value: !GetAtt PlantopediaDBInstance8.Endpoint.Address
+    Value: !GetAtt PlantopediaDBInstance9.Endpoint.Address
