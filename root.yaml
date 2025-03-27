@@ -1,3 +1,4 @@
 template-file-path: plantopedia-infrastructure.yaml
-parameters: {}
+parameters:
+  PlantopediaDBPassword: Pl#nt0pedia2025
 tags: {}
