@@ -1,0 +1,13 @@
+template-file-path: plantopedia-infrastructure.yaml
+parameters:
+  PrivateSubnet1Cidr: 10.0.3.0/24
+  PublicSubnet2Cidr: 10.0.2.0/24
+  PlantopediaDBInstanceClass: db.t3.medium
+  VpcCidr: 10.0.0.0/16
+  PrivateSubnet2Cidr: 10.0.4.0/24
+  PlantopediaDBPassword: '****'
+  PublicSubnet1Cidr: 10.0.1.0/24
+  PlantopediaDBName: plantopedia
+  PlantopediaDBAllocatedStorage: '20'
+  PlantopediaDBUser: plantuser
+tags: {}
